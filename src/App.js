@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import React, {useState, useContext} from 'react';
+import CalendarHeader from './components/CalendarHeader';
+import GlobalContext from './context/GlobalContext';
+import TaskModal from './components/TaskModal';
+import TimeBar from './components/TimeBar';
+import Months from './components/Months'
 import './App.css';
 
 function App() {
+const {showEventModal} = useContext(GlobalContext)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      {showEventModal ? <TaskModal /> : ""}
+      <div className='h-screen flex flex-col'>
+        <TimeBar/>
+        <CalendarHeader />
+        <div className="flex flex-1">
+          <Months/>
+        </div>
+      </div>
+    </React.Fragment>
   );
 }
 
